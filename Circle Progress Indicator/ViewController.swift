@@ -14,32 +14,41 @@ class ViewController: UIViewController {
     let backgroundShape = CAShapeLayer()
     var percent = 0.5
     
+    @IBOutlet weak var circleView: UIView!
+    
     override func viewDidLoad() {
         super.viewDidLoad()
-        view.layer.addSublayer(backgroundShape)
-        view.layer.addSublayer(progressShape)
+        circleView.layer.addSublayer(backgroundShape)
+        circleView.layer.addSublayer(progressShape)
     }
     
     override func viewWillLayoutSubviews() {
         super.viewWillLayoutSubviews()
-        updateIndicator(with: percent, isAnimated: true)
+        updateIndicator(with: percent, isAnimated: false)
     }
+    
+    @IBAction func sliderValueDidChange(_ sender: UISlider) {
+        let currentValue = sender.value
+        let mStr = String(format: "%.1f", currentValue)
+        print("New Slider Value \(mStr)")
+        updateIndicator(with: Double(currentValue), isAnimated: false)
+    }
+    
 
     func updateIndicator(with percent: Double, isAnimated: Bool = false) {
-        let shortestSide = min(view.frame.size.width, view.frame.size.height)
-        let strokeWidth: CGFloat = 40.0
-        let frame = CGRect(x: 0, y: 0, width: shortestSide - strokeWidth, height: shortestSide - strokeWidth)
-        backgroundShape.frame = frame
+
+        let strokeWidth: CGFloat = 15.0
+        backgroundShape.frame = circleView.bounds
         backgroundShape.path = UIBezierPath(ovalIn: backgroundShape.frame).cgPath
-        backgroundShape.position = view.center
-        backgroundShape.strokeColor = UIColor.black.cgColor
+        // backgroundShape.position = circleView.center
+        backgroundShape.strokeColor = #colorLiteral(red: 0.8374180198, green: 0.8374378085, blue: 0.8374271393, alpha: 1)
         backgroundShape.lineWidth = strokeWidth
+        backgroundShape.lineDashPattern = [3]
         backgroundShape.fillColor = UIColor.clear.cgColor
-        
-        progressShape.frame = frame
+        progressShape.frame = circleView.bounds
         progressShape.path = backgroundShape.path
         progressShape.position = backgroundShape.position
-        progressShape.strokeColor = UIColor.red.cgColor
+        progressShape.strokeColor = UIColor.white.cgColor
         progressShape.lineWidth = backgroundShape.lineWidth
         progressShape.fillColor = UIColor.clear.cgColor
         progressShape.strokeEnd = CGFloat(percent)
