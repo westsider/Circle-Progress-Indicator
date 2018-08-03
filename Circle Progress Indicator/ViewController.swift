@@ -28,23 +28,22 @@ class ViewController: UIViewController {
     override func viewDidAppear(_ animated: Bool) {
         updateIndicator(with: percent, isAnimated: false)
     }
-    
-    override func viewWillLayoutSubviews() {
-        super.viewWillLayoutSubviews()
-        
-    }
-    
+
     @IBAction func sliderValueDidChange(_ sender: UISlider) {
         let currentValue = sender.value
+        print("New Slider Value \(currentValue)")
         updateIndicator(with: Double(currentValue), isAnimated: false)
         updateDistance(withValue: currentValue)
     }
     
     
     func updateDistance(withValue:Float) {
-    
-        let distanceValue = withValue * 30.0
-        let mStr = String(format: "%.1f", distanceValue)
+        
+        let distanceValue = withValue * 15.0
+        var mStr = String(format: "%.1f", distanceValue)
+        if distanceValue == 15.0 {
+            mStr = "\u{221E}" 
+        }
         //print("New Slider Value \(mStr)")
         distanceText.text = "\(mStr)"
     }
