@@ -54,11 +54,11 @@
 		0DADF3E52114BDCD00A73283 /* Circle Progress Indicator */ = {
 			isa = PBXGroup;
 			children = (
-				0DADF3E62114BDCD00A73283 /* AppDelegate.swift */,
-				0DADF3E82114BDCD00A73283 /* ViewController.swift */,
 				0DADF3EA2114BDCD00A73283 /* Main.storyboard */,
+				0DADF3E82114BDCD00A73283 /* ViewController.swift */,
 				0DADF3ED2114BDCD00A73283 /* Assets.xcassets */,
 				0DADF3EF2114BDCD00A73283 /* LaunchScreen.storyboard */,
+				0DADF3E62114BDCD00A73283 /* AppDelegate.swift */,
 				0DADF3F22114BDCD00A73283 /* Info.plist */,
 			);
 			path = "Circle Progress Indicator";
