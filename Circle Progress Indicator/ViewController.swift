@@ -16,22 +16,37 @@ class ViewController: UIViewController {
     
     @IBOutlet weak var circleView: UIView!
     
+    @IBOutlet weak var distanceText: UILabel!
+    
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         circleView.layer.addSublayer(backgroundShape)
         circleView.layer.addSublayer(progressShape)
     }
     
+    override func viewDidAppear(_ animated: Bool) {
+        updateIndicator(with: percent, isAnimated: false)
+    }
+    
     override func viewWillLayoutSubviews() {
         super.viewWillLayoutSubviews()
-        updateIndicator(with: percent, isAnimated: false)
+        
     }
     
     @IBAction func sliderValueDidChange(_ sender: UISlider) {
         let currentValue = sender.value
-        let mStr = String(format: "%.1f", currentValue)
-        print("New Slider Value \(mStr)")
         updateIndicator(with: Double(currentValue), isAnimated: false)
+        updateDistance(withValue: currentValue)
+    }
+    
+    
+    func updateDistance(withValue:Float) {
+    
+        let distanceValue = withValue * 30.0
+        let mStr = String(format: "%.1f", distanceValue)
+        //print("New Slider Value \(mStr)")
+        distanceText.text = "\(mStr)"
     }
     
 
